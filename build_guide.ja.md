@@ -492,7 +492,9 @@ Uploading 26112 (0x6600) bytes starting at 0 (0x0)
 
 Jack Humbert氏が用意してくれたものが [BootloaderHID Makefile for Planck THK](https://gist.github.com/jackhumbert/50cbfead6ab27b6b3ee42f8c59d72776) にあるので、これを `keyboards/planck/thk/bootloader/Makefile` として保存し、`make` コマンドでビルドします。
 
-※この `Makefile` ではヒューズビットの変更を行うためのターゲットも定義されていますが、指定されているビット値が正しくないため `make` コマンドによるヒューズビットの変更は利用しないでください(上位バイト`0x90`、下位バイト`0xcf`となるのが正しいがこれが逆になっている)。これを実行してしまうと以降の手順でブートローダーを書き込むことはできなくなり、復旧には別な手順が必要となります。
+**注意:** この `Makefile` ではヒューズビットの変更を行うためのターゲットも定義されていますが、指定されているビット値が正しくないため `make` コマンドによるヒューズビットの変更は利用しないでください(上位バイト`0x90`、下位バイト`0xcf`となるのが正しいがこれが逆になっている)。これを実行してしまうと以降の手順でブートローダーを書き込むことはできなくなり、復旧には別な手順が必要となります。
+
+`make` コマンドを実行すると以下のようにビルドが行われます。
 
 ```console
 $ cd keyboards/planck/thk/bootloader
