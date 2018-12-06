@@ -333,6 +333,9 @@ DIPスイッチの1番のみをONの状態に切り替えてから(ファーム�
 
 この時点ではPlanckキーボードの `default` キーマップが適用されているので、キーアサインなどについては  [`keyboards/planck/keymaps/default`](https://github.com/qmk/qmk_firmware/blob/planck_thk/keyboards/planck/keymaps/default) を参考にしてください。また、左側のロータリーエンコーダーにはマウスホイールによるスクロールがアサイン済みとなっています。
 
+**2018-12-06 追記**
+上記の「ブートローダーからファームウェアへの切り替え動作が安定せず」の件は、ファームウェアのオーディオ機能を無効化することで安定して動作するようです。詳細については後述の「ファームウェアの起動を安定させる」の項目を参考にしてください。
+
 
 ### 17. 残りのキースイッチをはんだ付け
 
@@ -469,6 +472,54 @@ Uploading 26112 (0x6600) bytes starting at 0 (0x0)
 `-r` オプションが指定されているため、書き込み完了後に自動でファームウェアに制御が移り、コンピューターからは `Planck` USBデバイスとして認識されます。
 
 ただし前述のようにファームウェアの起動に失敗するケースがあるため、そのような場合にはリセットおよびESCキー押下の手順を踏みます。
+
+#### ファームウェアの起動を安定させる
+
+ファームウェアのコードを一部変更して、
+
+- 起動音(の一部)を無効にする
+- オーディオ機能を無効にする
+
+のいずれかを行うと、ブートローダーからファームウェアへの切り替えに失敗することは無くなり動作が安定するようです。
+
+起動音(の一部)を無効にする場合:
+```diff
+diff --git a/keyboards/planck/keymaps/default/config.h b/keyboards/planck/keymaps/default/config.h
+index 6fa31cc8a..919532316 100644
+--- a/keyboards/planck/keymaps/default/config.h
++++ b/keyboards/planck/keymaps/default/config.h
+@@ -1,8 +1,8 @@
+ #pragma once
+
+ #ifdef AUDIO_ENABLE
+-    #define STARTUP_SONG SONG(PLANCK_SOUND)
+-    // #define STARTUP_SONG SONG(NO_SOUND)
++    // #define STARTUP_SONG SONG(PLANCK_SOUND)
++    #define STARTUP_SONG SONG(NO_SOUND)
+
+     #define DEFAULT_LAYER_SONGS { SONG(QWERTY_SOUND), \
+                                   SONG(COLEMAK_SOUND), \
+```
+
+オーディオ機能を無効にする場合:
+```diff
+diff --git a/keyboards/planck/thk/rules.mk b/keyboards/planck/thk/rules.mk
+index bba4ea707..090764482 100644
+--- a/keyboards/planck/thk/rules.mk
++++ b/keyboards/planck/thk/rules.mk
+@@ -38,7 +38,7 @@ CONSOLE_ENABLE = no
+ COMMAND_ENABLE = yes
+ KEY_LOCK_ENABLE = no
+ NKRO_ENABLE = no            # Nkey Rollover - if this doesn't work, see here: https://github.com/tmk/tmk_keyboard/wiki/FAQ#nkro-doesnt-work
+-AUDIO_ENABLE = yes
++AUDIO_ENABLE = no
+
+ # Do not enable SLEEP_LED_ENABLE. it uses the same timer as BACKLIGHT_ENABLE
+ SLEEP_LED_ENABLE = no    # Breathing sleep LED during USB suspend
+```
+
+動作させている様子は[こちらのツイート](https://twitter.com/junya/status/1070659682832834565)にあります。
+
 
 ### 4. キーマップのカスタマイズ
 
