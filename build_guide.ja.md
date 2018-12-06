@@ -31,7 +31,7 @@
 1. 残りのキースイッチをはんだ付け
 1. スペーサーをネジで固定
 
-### ソフトウェア (ユーザー向け)
+### ソフトウェア (ユーザー向け) - How to flash custom firmware
 1. ファームウェアとブートローダーの関係
 1. ファームウェアのビルド
 1. ファームウェアの書き込み
@@ -39,7 +39,7 @@
 
 以下の手順は自作キットに同梱のものではなく、新しいATmega32Aを購入して利用する場合にのみ必要と鳴ります。
 
-### ソフトウェア (Planck開発者向け)
+### ソフトウェア (Planck開発者向け) - How to build and flash bootloader
 1. ブートローダーのビルド方法
 1. ブートローダーの書き込み方法
 1. ヒューズビットの変更
@@ -360,7 +360,7 @@ DIPスイッチの1番のみをONの状態に切り替えてから(ファーム�
 最後にクッションゴム4個をボトムプレートの四隅に貼り付ければハードウェアの実装は完了です。🎉
 
 
-## ソフトウェア (ユーザー向け)
+## ソフトウェア (ユーザー向け) - How to flash custom firmware
 
 この項目の内容は 2018-11-11 時点での
 
@@ -369,7 +369,7 @@ DIPスイッチの1番のみをONの状態に切り替えてから(ファーム�
 
 の内容を元にしています。
 
-### 1. ファームウェアとブートローダーの関係
+### 1. ファームウェアとブートローダーの関係 - Firmware and bootloader
 
 Planck THKはブートローダーとして [bootloadHID](https://www.obdev.at/products/vusb/bootloadhid.html) (V-USB Projects
  Bootload HID) を利用しています。bootloadHIDの実装は `planck_thk` ブランチの [keyboards/planck/thk/bootloader](https://github.com/qmk/qmk_firmware/tree/planck_thk/keyboards/planck/thk/bootloader) 以下に用意されています。
@@ -380,9 +380,9 @@ Planck THKはブートローダーとして [bootloadHID](https://www.obdev.at/p
 
 一方、ビルドしたファームウェアをブートローダー経由で書き込むためには、コンピューター側にもbootloadHIDの書き込みコマンドをインストールしてそれを利用する必要があります。
 
-### 2. ファームウェアのビルド
+### 2. ファームウェアのビルド - Build firmware
 
-#### planck_thk ブランチのチェックアウト
+#### planck_thk ブランチのチェックアウト - Checkout planck_thk branch
 
 QMK FirmwareのPlanck THK対応ブランチは2018-11-11時点でまだ `master` へマージされていないため、以下のようにして `qmk/qmk_firmware` リポジトリの `planck_thk` ブランチをチェックアウトしておきます。
 
@@ -395,7 +395,7 @@ $ ls keyboards/planck/thk
 README.md   bootloader  config.h    matrix.c    rules.mk    thk.c       thk.h       usbconfig.h
 ```
 
-#### ビルド方法
+#### ビルド方法 - Build custom firmware
 
 QMK FirmwareにおいてPlanck THKは `planck` キーボード内の1つのバリエーションとして定義されており(Planck rev6などの各リビジョンと同等)、
 
@@ -433,7 +433,7 @@ Checking file size of planck_thk_default.hex                                    
 
 ### 3. ファームウェアの書き込み
 
-#### bootloadHID のインストール
+#### bootloadHID のインストール - Install bootloadHID to your host computer
 
 前述のようにファームウェアの書き込みには、コンピューター側にも `bootloadHID` コマンドをインストールする必要があります。
 
@@ -454,7 +454,7 @@ usage: bootloadHID [-r] [<intel-hexfile>]
 
 Windowsの場合は [HIDBootFlash \- V\-USB](http://vusb.wikidot.com/project:hidbootflash) が利用できるかもしれません。
 
-#### ファームウェアの書き込み
+#### ファームウェアの書き込み - Flash custom firmware through USB with bootloadHID
 
 ファームウェアを書き込むには、Planck THKのブートローダーが起動している状態(コンピューターから `HIDBoot` デバイスが見えている状態)で以下のコマンドを実行します。
 
@@ -531,11 +531,11 @@ index bba4ea707..090764482 100644
 1. `bootloadHID -r planck_thk_キーマップ名.hex` でファームウェアを書き込む
 
 
-## ソフトウェア (Planck開発者向け)
+## ソフトウェア (Planck開発者向け) - How to build and flash bootloader
 
 ここでは、ブートローダーが書き込まれていないATmega32AをPlanck THKのMCUとして利用可能にするための手順について解説します。
 
-### 1. ブートローダーのビルド方法
+### 1. ブートローダーのビルド方法 - Build bootloader and combine it with custom firmware
 
 `planck_thk` ブランチの `keyboards/planck/thk/bootloader` には `Makefile` が不足しているため、まずこれを用意します。
 
@@ -582,7 +582,7 @@ avr-size main.hex
 
 という手順で書き込み用のファイルを用意します(順序はブートローダーが先でないと動作しません)。
 
-### 2. ブートローダーの書き込み方法
+### 2. ブートローダーの書き込み方法 - Flash hex file via Arduino ISP
 
 1の手順で用意した `*.hex` をISP(In-System Programming)用の回路で書き込みます。
 
@@ -626,7 +626,7 @@ avrdude: safemode: Fuses OK (E:FF, H:90, L:CF)
 avrdude done.  Thank you.
 ```
 
-### 3. ヒューズビットの変更
+### 3. ヒューズビットの変更 - Change fuse bits (beware to brick MCU)
 
 ATmega32AをPlanck THKのMCUとして利用するには、AVRチップに特有のヒューズビットを変更する必要があります。指定すべき値は `planck_thk` ブランチの `README.md` にて以下のように言及されています。
 
