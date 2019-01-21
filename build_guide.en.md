@@ -148,17 +148,17 @@ C1およびC2に使うコンデンサには以下の2種類を封入してあり
 手元でそれぞれを使用したものを製作しましたが動作に違いはありませんでしたので、C1およびC2には上記を踏まえたうえでどちらかのコンデンサを使ってください。
 
 
-## ハードウェア
+## Hardware
 
-トッププレートとなる基板上に各パーツを実装していきます。
+Let's soldering parts on a PCB.
 
-### 1. USBポート
+### 1. USB port
 
-USBコネクタを `USB PORT` の表示がある位置にはんだ付けします。
+Solder the USB connector on `USB PORT` silk.
 
 ![USB1](https://i.imgur.com/hHKRVL0.jpg)
 
-以下の写真のようにランドがかなり小さめかつ接近しているため、ショートしないように注意してください（最新のバージョンのPCBでは改善されているようです）。
+Since solder land for USB connector is so small and closes each other, be careful not to short (PCB version 0.1 improved this).
 
 ![USB2](https://i.imgur.com/SRa4vzi.jpg)
 
