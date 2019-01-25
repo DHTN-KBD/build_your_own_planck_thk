@@ -165,7 +165,7 @@ Since solder land for USB connector is so small and closes each other, be carefu
 ### 2. Diodes
 
 Solder 48 diodes from `D1` to `D48`.
-Diodes has polarity, place diode's black line on top side.
+Diodes has polarity, place diode's black line on up side.
 
 ![Diode1](https://i.imgur.com/UNsZqq2.jpg)
 
