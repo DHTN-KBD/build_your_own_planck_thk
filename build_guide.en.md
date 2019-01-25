@@ -176,6 +176,7 @@ Planck THK doesn't have case which covers soldered parts, so solder carefully an
 ### 3. LED
 
 Solder red LED on `PWR`, green LED on `ACT`.
+LED has polarity, insert short lead into `-` (minus) hole.
 
 ![LED1](https://i.imgur.com/IuVnN5Q.jpg)
 
