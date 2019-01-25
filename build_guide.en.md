@@ -162,23 +162,22 @@ Since solder land for USB connector is so small and closes each other, be carefu
 
 ![USB2](https://i.imgur.com/SRa4vzi.jpg)
 
-### 2. ダイオード
+### 2. Diodes
 
-ダイオードを `D1` から `D48` まで48個はんだ付けします（セットには予備が含まれているため2個余ります）。極性があるので、写真のようにダイオードの黒い帯が基板の上になるように向きに注意してください。
+Solder 48 diodes from `D1` to `D48`.
+Diodes has polarity, place diode's black line on top side.
 
 ![Diode1](https://i.imgur.com/UNsZqq2.jpg)
 
-Planck THKは完成後もはんだ付けしたパーツ類が見える構造なので、できるだけ綺麗にはんだ付けしましょう。ダイオードは、以下の写真のように手頃なブレッドボードの側面を利用して脚を曲げるとジャストサイズでした。
+Planck THK doesn't have case which covers soldered parts, so solder carefully and beautifully.
 
 ![Diode2](https://i.imgur.com/AjNaMj9.jpg)
 
 ### 3. LED
 
-赤色と緑色のLEDをそれぞれ `PWR` と `ACT` にはんだ付けします。
+Solder red LED on `PWR`, green LED on `ACT`.
 
 ![LED1](https://i.imgur.com/IuVnN5Q.jpg)
-
-脚にスルーホールから飛び出るぶんがあるため基板から少し浮くような形で取り付けることになります。はんだ付けの際に傾かないよう注意します。
 
 ![LED2](https://i.imgur.com/xHMAkXH.jpg)
 
